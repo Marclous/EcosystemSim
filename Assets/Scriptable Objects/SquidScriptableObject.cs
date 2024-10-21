@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SharkData", menuName = "EcosystemGame/Data/SharkData", order = 1)] 
+[CreateAssetMenu(fileName = "SquidData", menuName = "EcosystemGame/Data/SquidData", order = 1)] 
 public class SharkScriptableObject : ScriptableObject
 {
     public int hitPoint;
