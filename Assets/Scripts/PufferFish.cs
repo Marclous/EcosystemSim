@@ -32,7 +32,7 @@ public class PufferFish : Fish
         base.Attack(opponent);
     }
 
-    public IEnumerator Defend() {
+    public void Defend() {
         Debug.Log("Puffer fish enlarges");
         isEnlarged = true;
 
@@ -41,7 +41,7 @@ public class PufferFish : Fish
         Debug.Log("Puffer fish enlarged to: " + transform.localScale);
 
         // Wait for the specified duration
-        yield return new WaitForSeconds(enlargeDuration);
+       // yield return new WaitForSeconds(enlargeDuration);
 
         // Return to the original size
         transform.localScale = originalScale;
@@ -64,11 +64,12 @@ public class PufferFish : Fish
             }
         }else if(collision.gameObject.name == "SquidProjectile"){
             Debug.Log("Pufferfish got hit");
+            Defend();
             if (!isEnlarged)
-        {
+            {
             // Trigger the enlarge behavior
-            StartCoroutine(Defend());
-        }
+            
+            }
         }
     }
 }

@@ -45,6 +45,16 @@ public class FiniteStateMachine : MonoBehaviour
             currentState.UpdateState();
         }
 
+        if (chaseTarget == null || chaseTarget.hitPoints <= 0)
+    {
+        // Target is dead, switch back to exploring state
+        if (currentState != exploringState)
+        {
+            SwitchToState(exploringState);
+        }
+        return; // Exit early to avoid further checks
+    }
+
         float distanceToTarget = Vector2.Distance(thisOrganism.transform.position, chaseTarget.transform.position);
 
         // Transition to chasing state if the target is within the chasing threshold

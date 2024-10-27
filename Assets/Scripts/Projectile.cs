@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
         // Implement collision logic, e.g., damage the target
         Debug.Log(collision.gameObject.name+"got hit");
         Organism target = collision.GetComponent<Organism>();
-        if (target != null)
+        if (target != null && target.gameObject.name != "Squid")
         {
             target.TakeDamage(damage);
             Destroy(gameObject); // Destroy the projectile after hitting the target
