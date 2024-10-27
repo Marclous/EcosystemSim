@@ -19,8 +19,15 @@ public class Organism : MonoBehaviour
         
     }
 
+    public void TakeDamage(int damage) {
 
+        hitPoints -= damage;
 
+    }
+
+    public virtual void Attack(Organism opponent) {
+
+    }
 
     public void SpawnOrganism()
     {
@@ -32,7 +39,9 @@ public class Organism : MonoBehaviour
     protected void Update()
     {
         howLongLivedSoFar += Time.deltaTime;
-
+        if(hitPoints <= 0) {
+            Destroy(gameObject);
+        }
         ShouldIDie();
 
     }

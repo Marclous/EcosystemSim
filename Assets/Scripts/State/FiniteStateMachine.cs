@@ -16,9 +16,12 @@ public class FiniteStateMachine : MonoBehaviour
     public Organism chaseTarget;
 
     public float distanceThreshold = 5.0f;
+    public float battleRadius = 2.0f;
 
     public Exploring exploringState;
     public Chasing chasingState;
+    public Battle battleState;
+
     private Collider2D collider2D;
 
     // Start is called before the first frame update
@@ -27,6 +30,8 @@ public class FiniteStateMachine : MonoBehaviour
         collider2D = thisOrganism.GetComponent<Collider2D>();
 
         exploringState = new Exploring(thisOrganism, this);
+        chasingState = new Chasing(thisOrganism, chaseTarget, this);
+        battleState = new Battle(thisOrganism, chaseTarget, this);
 
         startingState = exploringState;
 
@@ -40,9 +45,21 @@ public class FiniteStateMachine : MonoBehaviour
             currentState.UpdateState();
         }
 
-        if(Vector2.Distance(thisOrganism.transform.position, chaseTarget.transform.position) < distanceThreshold) {
+        float distanceToTarget = Vector2.Distance(thisOrganism.transform.position, chaseTarget.transform.position);
+
+        // Transition to chasing state if the target is within the chasing threshold
+        if (distanceToTarget < distanceThreshold && currentState != chasingState && currentState != battleState)
+        {
             SwitchToState(chasingState);
-        }else if(currentState != exploringState){
+        }
+        // Transition to battle state if within the battle radius
+        else if (distanceToTarget < battleRadius && currentState != battleState)
+        {
+            SwitchToState(battleState);
+        }
+        // Transition back to exploring state if the target is out of the chasing radius
+        else if (distanceToTarget >= distanceThreshold && currentState != exploringState)
+        {
             SwitchToState(exploringState);
         }
 

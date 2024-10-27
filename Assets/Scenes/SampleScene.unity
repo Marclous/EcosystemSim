@@ -601,6 +601,7 @@ MonoBehaviour:
   thisOrganism: {fileID: 863052182}
   chaseTarget: {fileID: 0}
   distanceThreshold: 5
+  battleRadius: 2
 --- !u!4 &863052181 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7042882096427236085, guid: 9e14a5a511f3b4a9bb5a0159900ac96b, type: 3}
@@ -736,6 +737,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1464148085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1464148086}
+  m_Layer: 0
+  m_Name: LaunchPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1464148086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464148085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2124614072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1721825507 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8110870763008757298, guid: a8fd063e8d61f4741a9284826dad0967, type: 3}
@@ -756,6 +788,7 @@ MonoBehaviour:
   thisOrganism: {fileID: 1721825511}
   chaseTarget: {fileID: 0}
   distanceThreshold: 5
+  battleRadius: 2
 --- !u!4 &1721825510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4884195610603697243, guid: a8fd063e8d61f4741a9284826dad0967, type: 3}
@@ -801,12 +834,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.52
+  m_Radius: 0.41
 --- !u!1 &2124614069 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3889482677460225714, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
@@ -826,7 +859,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisOrganism: {fileID: 2124614071}
   chaseTarget: {fileID: 1721825511}
-  distanceThreshold: 5
+  distanceThreshold: 3
+  battleRadius: 2
 --- !u!114 &2124614071 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6123551110355457465, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
@@ -872,12 +906,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.45
+  m_Radius: 0.34
 --- !u!1001 &1315391935652726917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -886,6 +920,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3729572230636429051, guid: a8fd063e8d61f4741a9284826dad0967, type: 3}
+      propertyPath: lifespan
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729572230636429051, guid: a8fd063e8d61f4741a9284826dad0967, type: 3}
+      propertyPath: PufferFishData
+      value: 
+      objectReference: {fileID: 11400000, guid: f6b1f49a974639741b6a4e71f9a62778, type: 2}
     - target: {fileID: 3729572230636429051, guid: a8fd063e8d61f4741a9284826dad0967, type: 3}
       propertyPath: organismPrefab
       value: 
@@ -930,6 +972,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4884195610603697243, guid: a8fd063e8d61f4741a9284826dad0967, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8110870763008757298, guid: a8fd063e8d61f4741a9284826dad0967, type: 3}
       propertyPath: m_Name
       value: PufferFish
@@ -965,11 +1011,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5736692770460554653, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.5
+      value: 3.63
       objectReference: {fileID: 0}
     - target: {fileID: 5736692770460554653, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4
+      value: 1.51
       objectReference: {fileID: 0}
     - target: {fileID: 5736692770460554653, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1008,9 +1054,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 386d8d40b81926f4789572300efca51b, type: 2}
     - target: {fileID: 6123551110355457465, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
+      propertyPath: squidData
+      value: 
+      objectReference: {fileID: 11400000, guid: 386d8d40b81926f4789572300efca51b, type: 2}
+    - target: {fileID: 6123551110355457465, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
+      propertyPath: launchPoint
+      value: 
+      objectReference: {fileID: 1464148086}
+    - target: {fileID: 6123551110355457465, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
       propertyPath: organismPrefab
       value: 
       objectReference: {fileID: 2124614069}
+    - target: {fileID: 6123551110355457465, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 6853352297722091786, guid: 6f0c0aba07b58eb48b4fe04e7ccaf445, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5874726506073422257, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
@@ -1018,6 +1076,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5736692770460554653, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 305047447}
+    - targetCorrespondingSourceObject: {fileID: 5736692770460554653, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1464148086}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3889482677460225714, guid: a0317653ebbed418fafb815faa32d9ac, type: 3}
       insertIndex: -1

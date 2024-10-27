@@ -7,7 +7,7 @@ public class Chasing : State
 {
     Organism owner;
     Organism target;
-
+    public float chasingSpeed = 2.0f;
     FiniteStateMachine finiteStateMachine;
     public Chasing(Organism owner, Organism target, FiniteStateMachine finiteStateMachine) {
         this.owner = owner;
@@ -30,8 +30,20 @@ public class Chasing : State
 
     public override void UpdateState()
     {
-        Debug.Log("Updating Exploring State for" + owner.gameObject.name);
-        
+        Debug.Log("Updating Chasing State for" + owner.gameObject.name);
+        // Check if target still exists and is within chasing range
+        float distanceToTarget = Vector2.Distance(owner.transform.position, target.transform.position);
+        if (target != null && distanceToTarget < finiteStateMachine.distanceThreshold) 
+        {
+            // Move towards the target if it's within the radius
+            owner.transform.position = Vector2.MoveTowards(owner.transform.position, target.transform.position, chasingSpeed * Time.deltaTime);
+        }
+        else 
+        {
+            // If the target moves out of range, switch to exploring state
+            Debug.Log("Target out of range, switching to exploring state.");
+            finiteStateMachine.SwitchToState(finiteStateMachine.exploringState);
+        }
     }
 
 }
