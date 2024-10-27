@@ -12,6 +12,26 @@ public class Organism : MonoBehaviour
 
     protected float howLongLivedSoFar = 0;
 
+    public delegate void DeathEventHandler();
+    public event DeathEventHandler OnDeath;
+
+    public void TakeDamage(int damage)
+    {
+        hitPoints -= damage;
+        if (hitPoints <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        if (OnDeath != null)
+        {
+            OnDeath.Invoke();
+        }
+        Destroy(gameObject);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +39,6 @@ public class Organism : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage) {
-
-        hitPoints -= damage;
-
-    }
 
     public virtual void Attack(Organism opponent) {
 

@@ -15,4 +15,15 @@ public class FishBait : Organism
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Implement collision logic, e.g., damage the target
+        Debug.Log(collision.gameObject.name+"got hit");
+        Organism target = collision.GetComponent<Organism>();
+        if (target != null && target.gameObject.name == "PufferFish")
+        {
+            Destroy(gameObject); // Destroy the projectile after hitting the target
+        }
+    }
 }
