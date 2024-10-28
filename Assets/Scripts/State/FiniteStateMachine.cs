@@ -14,6 +14,7 @@ public class FiniteStateMachine : MonoBehaviour
     
     public Organism thisOrganism;
     public Organism chaseTarget;
+    private Organism currentTarget;
 
     public float distanceThreshold = 5.0f;
     public float battleRadius = 2.0f;
@@ -28,7 +29,7 @@ public class FiniteStateMachine : MonoBehaviour
     void Start()
     {
         collider2D = thisOrganism.GetComponent<Collider2D>();
-
+        
         exploringState = new Exploring(thisOrganism, this);
         chasingState = new Chasing(thisOrganism, chaseTarget, this);
         battleState = new Battle(thisOrganism, chaseTarget, this);
@@ -41,19 +42,27 @@ public class FiniteStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (chaseTarget == null)
+        {   
+            Debug.Log("Chase target is null. Returning to exploring state.");
+        }
+        else if (chaseTarget.hitPoints <= 0)
+        {
+            Debug.Log("Chase target is dead. Returning to exploring state.");
+        }
         if(currentState != null) {
             currentState.UpdateState();
         }
 
         if (chaseTarget == null || chaseTarget.hitPoints <= 0)
-    {
-        // Target is dead, switch back to exploring state
-        if (currentState != exploringState)
         {
-            SwitchToState(exploringState);
+        // Target is dead, switch back to exploring state
+            if (currentState != exploringState)
+            {
+                SwitchToState(exploringState);
+            }
+            return; // Exit early to avoid further checks
         }
-        return; // Exit early to avoid further checks
-    }
 
         float distanceToTarget = Vector2.Distance(thisOrganism.transform.position, chaseTarget.transform.position);
 

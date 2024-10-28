@@ -70,6 +70,9 @@ public class PufferFish : Fish
             // Trigger the enlarge behavior
             
             }
+        }else if(collision.gameObject.name == "FishBait"){
+            Debug.Log("Pufferfish eats");
+            Destroy(collision.gameObject);
         }
     }
 }

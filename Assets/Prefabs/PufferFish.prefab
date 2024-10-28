@@ -153,7 +153,7 @@ MonoBehaviour:
   thisOrganism: {fileID: 6497432513890601481}
   chaseTarget: {fileID: 6873668231051902501, guid: e9c307be2dadab6429aa343413f1b80c, type: 3}
   distanceThreshold: 3
-  battleRadius: 2
+  battleRadius: 0
 --- !u!58 &4139294590807374554
 CircleCollider2D:
   m_ObjectHideFlags: 0
