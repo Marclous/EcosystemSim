@@ -13,8 +13,9 @@ public class FiniteStateMachine : MonoBehaviour
     State currentState;
     
     public Organism thisOrganism;
-    public Organism chaseTarget;
+    public string targetSpeciesTag;
     private Organism currentTarget;
+    public Organism chaseTarget;
 
     public float distanceThreshold = 5.0f;
     public float battleRadius = 2.0f;
@@ -42,6 +43,38 @@ public class FiniteStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(this.name + "'s current state is" + currentState);
+        Debug.Log(this.name + "'s current target is" + chaseTarget.gameObject.name);
+        GameObject[] potentialTargets = GameObject.FindGameObjectsWithTag(targetSpeciesTag);
+        
+        float closestDistance = Mathf.Infinity;
+        Organism closestOrganism = null;
+
+        foreach (GameObject target in potentialTargets)
+        {
+            Organism organism = target.GetComponent<Organism>();
+            if (organism != null && organism != thisOrganism && organism.hitPoints > 0) // Check if the organism is valid and alive
+            {
+                float distance = Vector2.Distance(thisOrganism.transform.position, organism.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestOrganism = organism;
+                }
+            }
+        }
+
+        // Update the chase target to the closest organism found
+        if (closestOrganism != null)
+        {
+            chaseTarget = closestOrganism;
+        }
+        else
+        {
+            // If no valid targets are found, set chaseTarget to null
+            chaseTarget = null;
+        }
+
         if (chaseTarget == null)
         {   
             Debug.Log("Chase target is null. Returning to exploring state.");

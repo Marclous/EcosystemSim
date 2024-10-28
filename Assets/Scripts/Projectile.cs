@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+
         // Move the projectile towards the target
         if ((Vector2)transform.position != targetPosition)
         {
@@ -22,7 +23,13 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject); // Destroy the projectile when it reaches the target
         }
+        Vector3 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
 
+        // Check if the projectile is outside the screen's viewport
+        if (viewportPosition.x < 0 || viewportPosition.x > 1 || viewportPosition.y < 0 || viewportPosition.y > 1)
+        {
+            Destroy(gameObject); // Destroy the projectile if it is out of screen bounds
+        }
         
     }
 

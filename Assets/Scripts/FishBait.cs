@@ -24,15 +24,10 @@ public class FishBait : Organism
         Organism target = collision.GetComponent<Organism>();
         if (target != null && target.gameObject.name == "PufferFish")
         {
+            target.GetComponent<FiniteStateMachine>().chaseTarget = null;
             Destroy(gameObject); // Destroy the projectile after hitting the target
+            
         }
     }
-    private void OnCollisionEnter2D(Collider2D collision) {
-        Debug.Log(collision.gameObject.name+"got hit");
-        Organism target = collision.GetComponent<Organism>();
-        if (target != null && target.gameObject.name == "PufferFish")
-        {
-            Destroy(gameObject); // Destroy the projectile after hitting the target
-        }
-    }
+
 }

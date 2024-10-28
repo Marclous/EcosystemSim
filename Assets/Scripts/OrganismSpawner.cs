@@ -8,11 +8,25 @@ public class OrganismSpawner : MonoBehaviour
     public float spawnInterval = 5.0f; // Time interval between each spawn
     public int maxOrganisms = 10; // Maximum number of organisms that can be spawned at a time
     public float spawnRadius = 5.0f; // Radius around the spawner where organisms will be spawned
+    public AudioClip spawnLoopAudio; // The audio clip to play in the background
+    private AudioSource audioSource; // Audio source to play the audio
+
 
     private int currentOrganismCount = 0;
 
     void Start()
     {
+        // Set up the AudioSource component
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = spawnLoopAudio;
+        audioSource.loop = true; 
+        audioSource.playOnAwake = false; 
+        audioSource.volume = 0.1f;
+        // Start the audio loop
+        if (spawnLoopAudio != null)
+        {
+            audioSource.Play();
+        }
         // Start the spawning routine
         StartCoroutine(SpawnOrganismsRoutine());
     }

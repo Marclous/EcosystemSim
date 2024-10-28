@@ -7,7 +7,7 @@ public class PufferFish : Fish
     public float enlargeScale = 2.0f; // How much bigger the puffer fish should get
     public float enlargeDuration = 5.0f; // Duration to stay enlarged
     private Vector3 originalScale; // Store the original size
-
+    FiniteStateMachine finiteStateMachine;
     public int damageAmount = 20;
     private bool isEnlarged = false;
     public PufferFishScriptableObject PufferFishData;
@@ -16,6 +16,7 @@ public class PufferFish : Fish
         hitPoints = PufferFishData.hitPoint;
         lifespan = PufferFishData.lifespan;
         originalScale = transform.localScale;
+        finiteStateMachine = GetComponent<FiniteStateMachine>();
     }
 
     // Update is called once per frame
@@ -73,6 +74,7 @@ public class PufferFish : Fish
         }else if(collision.gameObject.name == "FishBait"){
             Debug.Log("Pufferfish eats");
             Destroy(collision.gameObject);
+            finiteStateMachine.chaseTarget = null;
         }
     }
 }

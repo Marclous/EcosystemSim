@@ -41,7 +41,7 @@ public class Organism : MonoBehaviour
 
 
     public virtual void Attack(Organism opponent) {
-
+        
     }
 
     public void SpawnOrganism()

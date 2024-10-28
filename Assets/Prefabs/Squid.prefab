@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 4787251967528128937}
   m_Layer: 0
   m_Name: Squid
-  m_TagString: Untagged
+  m_TagString: Squid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -288,6 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisOrganism: {fileID: 3711500657327846569}
+  targetSpeciesTag: PufferFish
   chaseTarget: {fileID: 6497432513890601481, guid: 0beaced1d1e191740900e258170ac28a, type: 3}
   distanceThreshold: 3
   battleRadius: 2

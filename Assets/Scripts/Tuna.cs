@@ -9,6 +9,7 @@ public class Tuna : Fish
     public int damageAmount = 10;     // Amount of damage dealt to the target organism
     public float attackCooldown = 1.0f; // Cooldown time between attacks
 
+    FiniteStateMachine finiteStateMachine;
     public TunaScriptableObject tunaData;
     private bool isDashing = false;
     private bool movingForward = true;
@@ -20,7 +21,7 @@ public class Tuna : Fish
     {
         lifespan = tunaData.lifespan;
         hitPoints = tunaData.hitPoint;
-       
+        finiteStateMachine = GetComponent<FiniteStateMachine>();
     }
 
     // Update is called once per frame
@@ -89,6 +90,8 @@ public class Tuna : Fish
             {
                 // Prepare the next dash
                 PrepareDashThroughTarget();
+            }else {
+                finiteStateMachine.chaseTarget = null;
             }
         }
     }

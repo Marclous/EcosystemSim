@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TunaData
   m_EditorClassIdentifier: 
   hitPoint: 40
-  lifespan: 40
+  lifespan: 20

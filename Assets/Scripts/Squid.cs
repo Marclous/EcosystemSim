@@ -29,6 +29,11 @@ public class Squid : Fish
         Projectile projScript = projectile.GetComponent<Projectile>();
         
         // Set the target for the projectile
-        projScript.SetTarget(opponent.transform.position);
+        if(opponent != null || opponent.gameObject.name != "PufferFish") {
+            projScript.SetTarget(opponent.transform.position);
+        }
+            
+        
+        
     }
 }

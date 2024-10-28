@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4139294590807374554}
   m_Layer: 0
   m_Name: PufferFish
-  m_TagString: Untagged
+  m_TagString: PufferFish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisOrganism: {fileID: 6497432513890601481}
+  targetSpeciesTag: FishBait
   chaseTarget: {fileID: 6873668231051902501, guid: e9c307be2dadab6429aa343413f1b80c, type: 3}
   distanceThreshold: 3
   battleRadius: 0

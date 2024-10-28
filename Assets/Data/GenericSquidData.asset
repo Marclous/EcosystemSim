@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GenericSquidData
   m_EditorClassIdentifier: 
   hitPoint: 20
-  lifespan: 50
+  lifespan: 30
